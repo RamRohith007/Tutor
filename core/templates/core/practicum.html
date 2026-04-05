@@ -1,0 +1,23 @@
+<!-- Practicum Section (Dynamic) -->
+<section id="projects" class="py-24 bg-slate-50 border-y border-slate-200">
+    <div class="max-w-6xl mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">Core Engineering Practicum</h2>
+            <p class="text-slate-500 max-w-2xl mx-auto text-lg">High-impact production deliverables designed for professional portfolio development.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {% for project in practicum_projects %}
+            <div class="bg-white p-10 rounded-[2.5rem] border border-slate-200 shadow-sm hover:shadow-xl transition-all group flex flex-col h-full">
+                <div class="w-16 h-16 bg-purple-50 text-purple-600 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">{{ project.icon }}</div>
+                <h3 class="text-xl font-bold text-slate-800 mb-3">{{ project.title }}</h3>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    {% for tag in project.tag_list %}
+                    <span class="bg-slate-100 text-slate-600 px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-widest">{{ tag }}</span>
+                    {% endfor %}
+                </div>
+                <p class="text-slate-500 text-xs leading-relaxed font-medium">{{ project.description }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>

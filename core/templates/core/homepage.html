@@ -1,0 +1,14 @@
+{% extends "core/base.html" %}
+{% block title %}Applied GenAI by VB_Academy | Home{% endblock %}
+{% block content %}
+{% if request.user.is_authenticated %}
+<div style="position:fixed;top:1rem;right:1rem;z-index:9999;">
+	<a href="/logout/" style="background:#0d9488;color:#fff;padding:0.75rem 1.5rem;border-radius:1.5rem;font-weight:bold;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,0.08);font-family:Inter,sans-serif;">Logout</a>
+</div>
+
+<!-- Main homepage content starts here -->
+<!-- PASTE: All HTML from <header> to </footer> and all sections, but do NOT include <html>, <head>, or <body> tags. -->
+{% else %}
+	<script>window.location.href = '/login/';</script>
+{% endif %}
+{% endblock %}

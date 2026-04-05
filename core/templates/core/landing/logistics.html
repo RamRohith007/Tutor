@@ -1,0 +1,38 @@
+<!-- Logistics & Admissions (Dynamic) -->
+<section id="logistics" class="py-24 bg-slate-950 text-white relative overflow-hidden">
+    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-teal-500 to-blue-500"></div>
+    <div class="max-w-6xl mx-auto px-4 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <div class="space-y-10">
+                <h3 class="text-xs font-black text-teal-500 uppercase tracking-[0.2em]">Residency Logistics</h3>
+                <div class="space-y-6">
+                    {% for session in logistics_sessions %}
+                    <div class="group bg-slate-900/50 p-8 rounded-[2rem] border border-slate-800 transition-all hover:border-teal-500">
+                        <h4 class="font-bold text-xl mb-2">{{ session.title }}</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed">{{ session.description }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="bg-white text-slate-900 rounded-[3rem] p-12 md:p-16 shadow-3xl relative overflow-hidden border border-slate-100">
+                <h3 class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-10">Enrollment Fee</h3>
+                {% if enrollment_fee %}
+                <div class="flex items-center gap-4 mb-10">
+                    <span class="text-[10px] font-bold text-slate-400">INR</span>
+                    <button id="currency-toggle" class="relative inline-flex h-8 w-16 cursor-pointer rounded-full bg-slate-100 transition-all border-2 border-slate-200">
+                        <span id="toggle-knob" class="translate-x-1 mt-[2px] inline-block h-5 w-5 transform rounded-full bg-slate-900 transition-transform shadow-md"></span>
+                    </button>
+                    <span class="text-[10px] font-bold text-slate-400">USD</span>
+                </div>
+                <div id="price-display" class="text-7xl font-black mb-10 tracking-tighter text-slate-900" data-inr="{{ enrollment_fee.currency_inr|default:50000 }}" data-usd="{{ enrollment_fee.currency_usd|default:600 }}">₹{{ enrollment_fee.currency_inr|default:50000 }}</div>
+                <ul class="space-y-5 mb-12">
+                    {% for detail in enrollment_fee.detail_list %}
+                    <li class="flex items-center text-sm font-semibold text-slate-600"><span class="text-teal-600 mr-3 text-xl">✦</span> {{ detail }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <button onclick="openModal()" class="w-full bg-slate-900 text-white font-black py-5 rounded-2xl hover:bg-teal-600 transition-all text-sm uppercase tracking-widest shadow-2xl active:scale-95">Initiate Application</button>
+            </div>
+        </div>
+    </div>
+</section>

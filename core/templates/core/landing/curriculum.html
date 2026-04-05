@@ -1,0 +1,44 @@
+<!-- Syllabus Section (Dynamic) -->
+<section id="curriculum" class="py-24 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-20">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight">Academic Curriculum</h2>
+            <p class="text-slate-500 text-lg font-medium">A rigorous 8-week immersion into the engineering of Generative AI systems.</p>
+        </div>
+        <div id="accordion-container" class="space-y-6 mb-24">
+            {% for phase in curriculum_phases %}
+            <div class="bg-white border border-slate-200 rounded-[2.5rem] overflow-hidden shadow-sm">
+                <button class="w-full px-10 py-8 text-left flex justify-between items-center bg-slate-50 hover:bg-slate-100 transition-colors focus:outline-none group" type="button" onclick="toggleAccordion({{ forloop.counter0 }})">
+                    <span class="font-bold text-slate-800 text-lg flex items-center">
+                        <span class="bg-slate-900 text-white px-3 py-1.5 rounded-xl text-[9px] font-black mr-6 group-hover:bg-teal-600 transition-all">PHASE {{ phase.order|stringformat:'02d' }}</span>
+                        {{ phase.title }}
+                    </span>
+                    <span id="icon-{{ forloop.counter0 }}" class="text-slate-300 text-3xl font-light transition-transform duration-300{% if phase.order == 1 %} rotate-45 text-teal-600{% endif %}">+</span>
+                </button>
+                <div id="content-{{ forloop.counter0 }}" class="accordion-content{% if phase.order == 1 %} open{% endif %} px-16 bg-white">
+                    <div class="py-10">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10">
+                            {% for section in phase.sections.all %}
+                            <div class="mb-6 last:mb-0">
+                                <h4 class="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em] mb-4 border-b border-slate-50 pb-2">{{ section.name }}</h4>
+                                <ul class="space-y-3">
+                                    {% for topic in section.topic_list %}
+                                    <li class="text-xs text-slate-600 flex items-start font-medium"><span class="text-teal-600 mr-2">✦</span>{{ topic }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% if phase.description %}
+                        <div class="mt-12 p-8 bg-teal-50/50 rounded-3xl border border-teal-100">
+                            <h5 class="text-[10px] font-black text-teal-600 uppercase tracking-widest mb-4">Production Assignment</h5>
+                            <p class="text-slate-600 text-sm italic font-medium leading-relaxed">{{ phase.description }}</p>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>

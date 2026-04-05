@@ -1,0 +1,66 @@
+{% extends "core/base.html" %}
+{% block title %}Login | Applied GenAI{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-slate-50 flex flex-col justify-center items-center px-4 font-['Inter']">
+    
+    <nav class="fixed top-6 right-6 z-50">
+        <a href="/" class="group flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-[#0d9488] transition-all bg-white/80 backdrop-blur-md px-6 py-3 rounded-2xl border border-slate-200 shadow-sm">
+            <svg class="w-3.5 h-3.5 rotate-180 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7"></path>
+            </svg>
+            <span>Back to Home</span>
+        </a>
+    </nav>
+
+    <div class="w-full max-w-[440px] space-y-8 flex flex-col">
+        <div class="text-center">
+            <div class="inline-flex items-center gap-3 bg-white px-4 py-2 rounded-2xl border border-slate-200 shadow-sm mb-4">
+                <div class="bg-[#0d9488] text-white p-1.5 rounded-lg font-bold text-[10px] shadow-sm">✦</div>
+                <span class="text-slate-950 font-black tracking-[0.2em] uppercase text-[10px]">
+                    Applied <span class="text-[#0d9488]">GenAI</span> 
+                    <span class="text-slate-400 font-medium tracking-normal ml-1">by VB_Academy</span>
+                </span>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-[3rem] border border-slate-200 p-10 shadow-sm relative overflow-hidden">
+            {% if error %}
+                <div class="mb-6 p-4 bg-rose-50 border border-rose-100 rounded-2xl text-rose-600 text-[11px] font-bold uppercase tracking-wider text-center">
+                    {{ error }}
+                </div>
+            {% endif %}
+
+            <form method="post" class="space-y-4">
+                {% csrf_token %}
+                <div class="space-y-2 mb-6">
+                    <p class="text-slate-400 text-[12px] font-medium tracking-wide">Enter your credentials...</p>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] ml-1">Username</label>
+                    <input type="text" name="username" required 
+                        class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-4 text-sm focus:outline-none focus:ring-2 focus:ring-[#0d9488]/20 focus:border-[#0d9488] transition-all placeholder:text-slate-300"
+                        placeholder="username">
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] ml-1">Password</label>
+                    <input type="password" name="password" required 
+                        class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-4 text-sm focus:outline-none focus:ring-2 focus:ring-[#0d9488]/20 focus:border-[#0d9488] transition-all placeholder:text-slate-300"
+                        placeholder="••••••••">
+                </div>
+
+                <button type="submit" 
+                    class="w-full bg-slate-950 hover:bg-[#0d9488] text-white py-5 rounded-2xl text-[11px] font-black uppercase tracking-[0.3em] transition-all shadow-lg shadow-slate-900/10 active:scale-[0.98] mt-4">
+                    Authenticate
+                </button>
+            </form>
+        </div>
+
+        <footer class="text-center text-slate-400 text-[10px] font-bold uppercase tracking-[0.2em] py-6">
+            &copy; 2026 VB_Academy. All rights reserved.
+        </footer>
+    </div>
+</div>
+{% endblock %}

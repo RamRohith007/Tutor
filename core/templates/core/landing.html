@@ -1,0 +1,130 @@
+{% extends "core/base.html" %}
+{% block title %}Applied GenAI by VB_Academy | Advanced Engineering Certification{% endblock %}
+{% block content %}
+
+<!-- Navigation -->
+<nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+            <div class="flex items-center space-x-2">
+                <div class="bg-slate-900 text-white p-1.5 rounded-lg font-bold text-xl">✦</div>
+                <span class="font-extrabold text-xl text-slate-900 tracking-tight">Applied <span class="text-teal-600">GenAI</span> <span class="text-slate-400 font-medium text-sm">by VB_Academy</span></span>
+            </div>
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="#overview" class="text-[10px] font-bold uppercase tracking-widest text-slate-500 hover:text-teal-600 transition-colors">Overview</a>
+                <a href="#curriculum" class="text-[10px] font-bold uppercase tracking-widest text-slate-500 hover:text-teal-600 transition-colors">Curriculum</a>
+                <a href="#projects" class="text-[10px] font-bold uppercase tracking-widest text-slate-500 hover:text-teal-600 transition-colors">Practicum</a>
+                <a href="/login/" class="bg-slate-900 text-white text-[10px] font-bold uppercase tracking-widest px-6 py-2.5 rounded-full hover:bg-teal-600 transition-all shadow-lg active:scale-95">Login</a>
+                <button onclick="openModal()" class="bg-teal-600 text-white text-[10px] font-bold uppercase tracking-widest px-6 py-2.5 rounded-full hover:bg-teal-700 transition-all shadow-lg active:scale-95">Enroll Now</button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<header id="overview" class="relative bg-white pt-16 md:pt-24 pb-20 border-b border-slate-100 overflow-hidden">
+    <div class="absolute -top-24 -right-24 w-96 h-96 bg-teal-50 rounded-full blur-3xl opacity-60"></div>
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col lg:flex-row items-center gap-12">
+        <div class="lg:w-3/5">
+            <h1 class="text-4xl md:text-5xl lg:text-7xl font-extrabold text-slate-900 leading-[1.1] mb-8 tracking-tight">
+                Mastering Applied <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-blue-600">Generative AI</span>
+            </h1>
+            <p class="text-lg md:text-xl text-slate-500 mb-10 leading-relaxed max-w-2xl font-medium">
+                A comprehensive 8-week technical specialization into the engineering of large language models. Master the GenAI stack—from <span class="text-slate-900 font-bold">optimizing Python concurrency for LLM inference</span> and <span class="text-slate-900 font-bold">productionizing AI services via FastAPI</span> to building <span class="text-slate-900 font-bold">Multi-Headed Attention layers</span> and <span class="text-slate-900 font-bold">Stateful Agentic Workflows</span>.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4">
+                <button onclick="openModal()" class="bg-slate-900 hover:bg-teal-600 text-white font-bold py-4 px-10 rounded-2xl shadow-2xl transition-all hover:scale-[1.02] active:scale-95">Apply for Admission</button>
+                <a href="#curriculum" class="bg-white border-2 border-slate-100 text-slate-600 font-bold py-4 px-10 rounded-2xl hover:border-teal-500 hover:text-teal-700 transition-all text-center">Review Course Objectives</a>
+            </div>
+        </div>
+        <div class="lg:w-2/5 w-full">
+            <div class="glass-card p-8 rounded-[2.5rem] shadow-2xl border border-slate-100">
+                <h3 class="font-bold text-slate-400 mb-8 text-center text-[10px] uppercase tracking-widest">GenAI Pedagogical Index</h3>
+                <div class="chart-container">
+                    <canvas id="courseChart" style="display: block; box-sizing: border-box; height: 300px; width: 302.8px;" width="605" height="600"></canvas>
+                </div>
+                <p class="text-[10px] text-center text-slate-400 mt-8 font-bold leading-tight uppercase tracking-widest">32 Contact Hours • Theory & Production Sprints</p>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Strategic Personalization Section -->
+{% include "core/landing/personalization.html" %}
+
+<!-- GenAI Decoder Section -->
+{% include "core/landing/decoder.html" %}
+
+<!-- Syllabus Section (Dynamic) -->
+{% include "core/landing/curriculum.html" %}
+
+<!-- Practicum Section (Dynamic) -->
+{% include "core/landing/practicum.html" %}
+
+<script>
+function toggleAccordion(idx) {
+    const content = document.getElementById(`content-${idx}`);
+    const icon = document.getElementById(`icon-${idx}`);
+    if (!content || !icon) return;
+    const isOpen = content.classList.contains('open');
+    document.querySelectorAll('.accordion-content').forEach((c, i) => {
+        c.classList.remove('open');
+        const otherIcon = document.getElementById(`icon-${i}`);
+        if (otherIcon) {
+            otherIcon.style.transform = 'rotate(0deg)';
+            otherIcon.classList.remove('text-teal-600');
+        }
+    });
+    if (!isOpen) {
+        content.classList.add('open');
+        icon.style.transform = 'rotate(45deg)';
+        icon.classList.add('text-teal-600');
+    }
+}
+</script>
+
+<!-- Admissions Modal (Django form) -->
+{% include "core/landing/modal.html" %}
+
+<!-- Faculty Section (Dynamic) -->
+{% include "core/landing/faculty.html" %}
+
+<!-- Logistics & Admissions (Dynamic) -->
+{% include "core/landing/logistics.html" %}
+
+<script>
+function initCurrencyToggle() {
+    const priceDisplay = document.getElementById('price-display');
+    const toggleButton = document.getElementById('currency-toggle');
+    const toggleKnob = document.getElementById('toggle-knob');
+    if (!priceDisplay || !toggleButton || !toggleKnob) return;
+
+    const inrValue = parseInt(priceDisplay.dataset.inr || '50000', 10);
+    const usdValue = parseInt(priceDisplay.dataset.usd || '600', 10);
+    let showingInr = true;
+
+    function updatePrice() {
+        if (showingInr) {
+            priceDisplay.textContent = `₹${inrValue.toLocaleString()}`;
+            priceDisplay.classList.remove('text-teal-600');
+            priceDisplay.classList.add('text-slate-900');
+            toggleKnob.classList.remove('translate-x-8');
+            toggleKnob.classList.add('translate-x-1');
+        } else {
+            priceDisplay.textContent = `$${usdValue.toLocaleString()}`;
+            priceDisplay.classList.remove('text-slate-900');
+            priceDisplay.classList.add('text-teal-600');
+            toggleKnob.classList.remove('translate-x-1');
+            toggleKnob.classList.add('translate-x-8');
+        }
+    }
+
+    toggleButton.addEventListener('click', function () {
+        showingInr = !showingInr;
+        updatePrice();
+    });
+}
+
+document.addEventListener('DOMContentLoaded', initCurrencyToggle);
+</script>
+{% endblock %}

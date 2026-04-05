@@ -1,0 +1,36 @@
+<!-- Admissions Modal (Django form) -->
+<div id="application-modal" class="fixed inset-0 z-[100] flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300 p-4">
+    <div class="absolute inset-0 modal-overlay" onclick="closeModal()"></div>
+    <div class="bg-white rounded-[3rem] shadow-3xl w-full max-w-xl mx-auto transform transition-all duration-300 flex flex-col max-h-[90vh] overflow-hidden relative z-10 border border-slate-200 scale-95">
+        <div class="bg-slate-900 p-10 flex justify-between items-center text-white shrink-0">
+            <div>
+                <h3 class="text-2xl font-extrabold tracking-tight">Admissions Request</h3>
+                <p class="text-[10px] text-teal-400 font-black uppercase mt-1 tracking-[0.2em]">VB_Academy Enrollment</p>
+            </div>
+            <button onclick="closeModal()" class="text-slate-500 hover:text-white text-4xl font-light transition-colors">×</button>
+        </div>
+        <div class="p-10 overflow-y-auto">
+            <form method="post" action="/admissions/apply/" class="space-y-6">
+                {% csrf_token %}
+                <div>
+                    <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Full Name</label>
+                    <input type="text" name="full_name" required class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 text-slate-800 focus:ring-2 focus:ring-teal-500 outline-none transition-all shadow-inner font-medium" placeholder="Jane Doe">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Email Address</label>
+                    <input type="email" name="email" required class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 text-slate-800 focus:ring-2 focus:ring-teal-500 outline-none transition-all shadow-inner font-medium" placeholder="you@firm.com">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">GenAI Learning Objectives</label>
+                    <textarea name="motivation" required rows="4" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 text-slate-800 focus:ring-2 focus:ring-teal-500 outline-none transition-all shadow-inner resize-none font-medium" placeholder="Background and goals."></textarea>
+                </div>
+                <button type="submit" class="w-full bg-slate-900 hover:bg-teal-600 text-white font-black py-5 rounded-2xl transition-all shadow-2xl text-xs uppercase tracking-widest active:scale-95">Submit Application</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+function openModal() { document.getElementById('application-modal').classList.add('opacity-100', 'pointer-events-auto'); document.querySelector('#application-modal .bg-white').classList.remove('scale-95'); }
+function closeModal() { document.getElementById('application-modal').classList.remove('opacity-100', 'pointer-events-auto'); document.querySelector('#application-modal .bg-white').classList.add('scale-95'); }
+</script>
